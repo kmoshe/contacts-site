@@ -13,7 +13,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
 import 'sanitize.css/sanitize.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 // Import root app
 import { App } from 'app';
 

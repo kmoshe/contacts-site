@@ -9,7 +9,7 @@ interface Props {
 export function ContactDetails({ contact }: Props) {
   return (
     <Wrapper>
-        <img src={contact.picture.thumbnail} />
+        <img src={contact.picture.large} />
       <Name>
         {contact.name.title} {contact.name.last} {contact.name.first}
       </Name>
@@ -36,17 +36,4 @@ const Wrapper = styled.div`
 const Name = styled.div`
   flex: 1;
   padding: 0.625rem 0;
-`;
-
-const Info = styled.div`
-  display: flex;
-`;
-
-const StarCount = styled.div`
-  display: flex;
-  align-items: center;
-  min-width: 6rem;
-  .icon {
-    margin-right: 0.125rem;
-  }
 `;

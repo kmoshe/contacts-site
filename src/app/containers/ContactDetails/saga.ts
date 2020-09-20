@@ -5,7 +5,6 @@ import { Contact } from '../../../types/Contact';
 import { ContactErrorType } from './types';
 
 export function* getContact(action) {
-  debugger;
   let contacts: Contact[] = yield select(selectContacts);
   let contact = contacts.find(current => current.login.uuid === action.payload);
   if (contact) {

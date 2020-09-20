@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
@@ -16,6 +16,7 @@ import {
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { ContactErrorType } from '../ContactList/types';
 import { Link } from '../../components/Link';
+import './ContactList.css';
 
 export function ContactList() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -45,23 +46,26 @@ export function ContactList() {
   };
 
   return (
-    <Wrapper>
-      <FormGroup onSubmit={onSubmitForm}>
-        <h3>Contacts Page</h3>
-        <InputWrapper>{isLoading && <LoadingIndicator small />}</InputWrapper>
-      </FormGroup>
+    <Fragment>
+      <h1>Contacts Page</h1>
+      {isLoading && <LoadingIndicator small />}
       {contacts?.length > 0 ? (
-        <List>
+        <ul>
           {contacts.map(contact => (
-            <Link to={`/contact/${contact.login.uuid}`} key={contact.login.uuid}>
-              <ContactItem key={contact.login.uuid} contact={contact} />
-            </Link>
+            <li
+              className="col-md-6 col-lg-4 col-sm-12"
+              key={contact.login.uuid}
+            >
+              <Link to={`/contact/${contact.login.uuid}`}>
+                <ContactItem key={contact.login.uuid} contact={contact} />
+              </Link>
+            </li>
           ))}
-        </List>
+        </ul>
       ) : error ? (
         <ErrorText>{contactListErrorText(error)}</ErrorText>
       ) : null}
-    </Wrapper>
+    </Fragment>
   );
 }
 
@@ -78,35 +82,6 @@ export const contactListErrorText = (error: ContactErrorType) => {
   }
 };
 
-const Wrapper = styled.div`
-  display:flex ${TextButton} {
-    margin: 16px 0;
-    font-size: 0.875rem;
-  }
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${Input} {
-    width: ${100 / 3}%;
-    margin-right: 0.5rem;
-  }
-`;
-
 const ErrorText = styled.span`
   color: ${p => p.theme.text};
-`;
-
-const FormGroup = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
 `;

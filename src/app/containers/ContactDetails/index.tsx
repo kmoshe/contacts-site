@@ -10,8 +10,8 @@ import { sliceKey, reducer, actions } from './slice';
 import { contactDetailsSaga } from './saga';
 import {
   selectContact,
-  selectLoading, 
-  selectLoaded, 
+  selectLoading,
+  selectLoaded,
   selectError,
 } from './selectors';
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
@@ -23,7 +23,7 @@ export function ContactDetails() {
   useInjectSaga({ key: sliceKey, saga: contactDetailsSaga });
 
   const contact = useSelector(selectContact);
-  const isLoading = useSelector(selectLoading); 
+  const isLoading = useSelector(selectLoading);
   const isLoaded = useSelector(selectLoaded);
   const error = useSelector(selectError);
 
@@ -97,10 +97,4 @@ const FormGroup = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 `;
